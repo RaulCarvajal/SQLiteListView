@@ -27,9 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void llenarLista(){
         bd.open();
+        /*
         bd.insertContact("Raúl Carvajal","raul@gmail.com","311-125-67-63");
         bd.insertContact("Lidia Carvajal","lidia@gmail.com","311-125-67-63");
         bd.insertContact("Alian Carvajal","alian@gmail.com","311-125-67-63");
+        bd.insertContact("Norma Brambila","norma@gmail.com","311-125-67-63");
+        bd.insertContact("Oliver Galaviz","oliver@gmail.com","311-125-67-63");
+        bd.insertContact("Eduardo Barbosa","eduardo@gmail.com","311-125-67-63");
+        bd.insertContact("Daniel Medrano","daniel@gmail.com","311-125-67-63");
+        bd.insertContact("Julio Bautista","julio @gmail.com","311-125-67-63");*/
 
         int n=bd.lengthQuery();
 
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         int ids[] = new int[n];
 
         int i=0;
-        Cursor result=bd.getAllContacts();
+        Cursor result=bd.getAllContactsAZ();
         result.moveToFirst();
         while (!result.isAfterLast()) {
             int id=result.getInt(0);

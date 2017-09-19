@@ -3,6 +3,7 @@ package com.example.chapa.sqlitelistview;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -86,9 +87,14 @@ public class DBAdapter {
                 KEY_EMAIL, KEY_PHONE}, null, null, null, null, null);
     }
 
-    public Vector getAllContactsVector(){
+    public Cursor getAllContactsAZ() {
+        String sql="SELECT * FROM "+DATABASE_TABLE+" ORDER BY "+KEY_NAME+" ; ";
+        return db.rawQuery(sql,null);
+    }
+
+    public Vector getAllContactsVector(Cursor cursor){
         Vector<String> vt = new Vector<String>();
-        Cursor result=getAllContacts();
+        Cursor result=cursor;
         result.moveToFirst();
         while (!result.isAfterLast()) {
             int id=result.getInt(0);
