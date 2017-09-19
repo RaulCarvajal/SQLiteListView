@@ -1,15 +1,16 @@
 package com.example.chapa.sqlitelistview;
 
 import android.database.Cursor;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView lista;
+    FloatingActionButton fab;
     DBAdapter bd;
 
     AdaptadorListView adapter;
@@ -18,19 +19,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         lista = (ListView) findViewById(R.id.lista);
-
+        fab=(FloatingActionButton)findViewById(R.id.floatingActionButton);
         bd=new DBAdapter(getApplicationContext());
+        llenarLista();
+    }
 
+    private void llenarLista(){
         bd.open();
         bd.insertContact("Raúl Carvajal","raul@gmail.com","311-125-67-63");
         bd.insertContact("Lidia Carvajal","lidia@gmail.com","311-125-67-63");
         bd.insertContact("Alian Carvajal","alian@gmail.com","311-125-67-63");
 
         int n=bd.lengthQuery();
-
-        Toast.makeText(this,""+n, Toast.LENGTH_SHORT).show();
 
         String [] nombre = new String[n];
         String [] email = new String[n];
@@ -60,10 +61,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new AdaptadorListView(this, nombre,ids,email,telefono);
         lista.setAdapter(adapter);
 
-
-        //ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,bd.getAllContactsVector());
-        //ArrayAdapter<String> adp = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,getTabla(num));//Cambia tamaño
-        //lista.setAdapter(adp);*/
         bd.close();
     }
 }
